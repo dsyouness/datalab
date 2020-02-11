@@ -1,0 +1,7 @@
+print('ok de fichier')
+print('ok de fichier')
+print('ok de fichier')
+print('ok de fichier')
+print('ok de fichier')
+print('ok de fichier')
+print('ok de fichier')

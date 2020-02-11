@@ -1,9 +1,48 @@
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
 <h1>Hello</h1>
 
-{{ liste }}
+{#{{ list_files }}#}
 
-{% for element in liste %}
+{% for element in list_files %}
 <br/>
-{{ element }}
+<input type="button" value="{{ element }}" class="btn-file">
 
 {% endfor %}
+<div class="output">
+</div>
+
+<script>
+    $(".btn-file").click(function (e) {
+        const clicked_file= $(this).attr('value');
+        console.log(clicked_file);
+        $.ajax(
+            {
+                type : "GET",
+                url : "runFile",
+                data : {
+                    file : clicked_file
+                },
+                success:function (data) {
+                    $(".output").empty()
+                    output = data['output_file'];
+                    lines = output.split('\n');
+                    //$(".output").html(output);
+
+                    for (i = 0; i < lines.length; i++) {
+                      if (lines[i] != "") {
+                          html = "<div>" + lines[i] + "</div>"
+                            $(".output").append(html);
+                      }
+                    }
+                }
+            }
+        )
+
+    })
+
+
+
+</script>
